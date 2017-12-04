@@ -1,13 +1,10 @@
-var Koa = require('koa');
-var compress = require('koa-compress');
-var logger = require('koa-logger');
+const Koa = require('koa');
+const compress = require('koa-compress');
+const logger = require('koa-logger');
 
 const indexRoutes = require('./src/routes');
 
 const app = new Koa();
-
-// Environment
-var env = process.env.NODE_ENV || 'development';
 
 // Port
 const PORT = process.env.PORT || 1337;
