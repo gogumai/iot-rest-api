@@ -7,6 +7,8 @@ const router = Router({ prefix: '/devices' });
 router.post('/', Devices.addDevice);
 router.get('/', Devices.getAllDevices);
 
-router.use('/:deviceId/readings', ReadingsRouter.routes());
+router.use('/:deviceId/readings', ReadingsRouter.nestedRouter.routes());
 
-module.exports = router;
+module.exports = {
+  router,
+};

@@ -14,7 +14,7 @@ const addDevice = async (ctx, next) => {
       ctx.status = 201;
       ctx.body = {
         success: true,
-        device,
+        result: device,
       };
     })
     .catch((err) => {

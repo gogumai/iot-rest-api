@@ -1,9 +1,14 @@
 const Router = require('koa-router');
 const Readings = require('../controllers/readings');
 
-const router = Router();
+const nestedRouter = Router();
+nestedRouter.get('/', Readings.getReadingsForDevice);
+nestedRouter.post('/', Readings.addReading);
 
-router.get('/', Readings.getReadingsForDevice);
-router.post('/', Readings.addReading);
+const router = Router({ prefix: '/readings' });
+router.get('/', Readings.getReadings);
 
-module.exports = router;
+module.exports = {
+  nestedRouter,
+  router,
+};

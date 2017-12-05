@@ -3,7 +3,6 @@ const compress = require('koa-compress');
 const logger = require('koa-logger');
 const bodyParser = require('koa-bodyparser');
 
-// const indexRoutes = require('./src/routes');
 const devicesRoutes = require('./src/routes/devices');
 const readingsRoutes = require('./src/routes/readings');
 
@@ -21,8 +20,8 @@ app.use(logger());
 // Compress
 app.use(compress());
 
-app.use(devicesRoutes.routes());
-// app.use(readingsRoutes.routes());
+app.use(devicesRoutes.router.routes());
+app.use(readingsRoutes.router.routes());
 
 app.listen(PORT);
 console.log(`listening on port ${PORT}`); // eslint-disable-line no-console
