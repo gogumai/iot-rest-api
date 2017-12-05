@@ -1,11 +1,6 @@
 const shortid = require('shortid');
 const Device = require('./schema');
 
-const findDevice = async (options) => {
-  const device = await Device.Model.findOne(options);
-  return device;
-};
-
 const findDeviceById = async (id) => {
   const device = await Device.Model.findById(id);
   return device;
@@ -31,7 +26,6 @@ const saveDevice = async (device) => {
 
 module.exports = {
   findDeviceById,
-  findOne: findDevice,
   findAll,
   saveDevice,
 };

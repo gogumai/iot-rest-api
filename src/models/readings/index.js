@@ -6,7 +6,7 @@ const findReadings = async (options) => {
   try {
     const readings = await Reading.Model.find(options);
     if (!readings) return Promise.reject(new Error('No readings matched :('));
-    return Promise.resolve({ readings });
+    return Promise.resolve(readings);
   } catch (e) {
     return Promise.reject(new Error(e));
   }
@@ -16,7 +16,7 @@ const findReadingsForDevice = async (id) => {
   try {
     const device = await Device.findDeviceById(id);
     if (!device) return Promise.reject(new Error('Device not exists :('));
-    return Promise.resolve({ readings: device.readings });
+    return Promise.resolve(device.readings);
   } catch (e) {
     return Promise.reject(new Error(e));
   }
