@@ -1,7 +1,7 @@
 const Readings = require('../models/readings');
 const { buildOkBody, buildErrorBody } = require('../utils');
 
-const getReadings = async (ctx, next) => {
+const getReadings = async (ctx) => {
   await Readings.findReadings(ctx.query)
     .then((readings) => {
       ctx.status = 200;
@@ -11,10 +11,9 @@ const getReadings = async (ctx, next) => {
       ctx.status = 400;
       ctx.body = buildErrorBody(err);
     });
-  await next();
 };
 
-const getReadingsForDevice = async (ctx, next) => {
+const getReadingsForDevice = async (ctx) => {
   await Readings.findReadingsForDevice(ctx.params.deviceId)
     .then((readings) => {
       ctx.status = 200;
@@ -24,10 +23,9 @@ const getReadingsForDevice = async (ctx, next) => {
       ctx.status = 400;
       ctx.body = buildErrorBody(err);
     });
-  await next();
 };
 
-const addReading = async (ctx, next) => {
+const addReading = async (ctx) => {
   await Readings.saveReading(ctx.params.deviceId, ctx.request.body)
     .then((reading) => {
       ctx.status = 201;
@@ -37,8 +35,6 @@ const addReading = async (ctx, next) => {
       ctx.status = 400;
       ctx.body = buildErrorBody(err);
     });
-
-  await next();
 };
 
 module.exports = {

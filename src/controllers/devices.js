@@ -1,7 +1,7 @@
 const Devices = require('../models/devices');
 const { buildOkBody, buildErrorBody } = require('../utils');
 
-const getAllDevices = async (ctx, next) => {
+const getAllDevices = async (ctx) => {
   await Devices.findAll()
     .then((devices) => {
       ctx.status = 200;
@@ -11,10 +11,9 @@ const getAllDevices = async (ctx, next) => {
       ctx.status = 400;
       ctx.body = buildErrorBody(err);
     });
-  await next();
 };
 
-const addDevice = async (ctx, next) => {
+const addDevice = async (ctx) => {
   await Devices.saveDevice(ctx.request.body)
     .then((device) => {
       ctx.status = 201;
@@ -24,7 +23,6 @@ const addDevice = async (ctx, next) => {
       ctx.status = 400;
       ctx.body = buildErrorBody(err);
     });
-  await next();
 };
 
 module.exports = {
