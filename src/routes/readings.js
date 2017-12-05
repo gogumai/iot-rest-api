@@ -3,7 +3,7 @@ const Readings = require('../controllers/readings');
 
 const router = Router();
 
-router.get('/', Readings.getAllReadings);
+router.get('/', Readings.getReadingsForDevice);
 router.post('/', Readings.addReading);
 
 module.exports = router;

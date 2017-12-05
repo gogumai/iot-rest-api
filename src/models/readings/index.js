@@ -2,15 +2,25 @@ const shortid = require('shortid');
 const Reading = require('./schema');
 const Device = require('../devices');
 
-const findReadings = async (options) => {
-  const reading = await Reading.Model.findOne(options);
-  return reading;
+// const findReadings = async (options) => {
+//   const reading = await Reading.Model.findOne(options);
+//   return reading;
+// };
+
+const findReadingsForDevice = async (id) => {
+  try {
+    const device = await Device.findDeviceById(id);
+    if (!device) return Promise.reject(new Error('Device not exists :('));
+    return Promise.resolve({ readings: device.readings });
+  } catch (e) {
+    return Promise.reject(new Error(e));
+  }
 };
 
-const findAll = async () => {
-  const readings = await Reading.Model.find({});
-  return readings;
-};
+// const findAll = async () => {
+//   const readings = await Reading.Model.find({});
+//   return readings;
+// };
 
 const saveReading = async (deviceId, reading) => {
   try {
@@ -29,7 +39,8 @@ const saveReading = async (deviceId, reading) => {
 };
 
 module.exports = {
-  findReadings,
-  findAll,
+  // findReadings,
+  findReadingsForDevice,
+  // findAll,
   saveReading,
 };
