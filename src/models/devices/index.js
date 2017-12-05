@@ -2,18 +2,23 @@ const shortid = require('shortid');
 const Device = require('./schema');
 
 const findDevice = async (options) => {
-  const device = await Device.findOne(options);
+  const device = await Device.Model.findOne(options);
+  return device;
+};
+
+const findDeviceById = async (id) => {
+  const device = await Device.Model.findById(id);
   return device;
 };
 
 const findAll = async () => {
-  const devices = await Device.find({});
+  const devices = await Device.Model.find({});
   return devices;
 };
 
 const saveDevice = async (device) => {
   try {
-    const newDevice = new Device({
+    const newDevice = new Device.Model({
       _id: shortid.generate(),
       ...device,
     });
@@ -25,6 +30,7 @@ const saveDevice = async (device) => {
 };
 
 module.exports = {
+  findDeviceById,
   findOne: findDevice,
   findAll,
   saveDevice,
