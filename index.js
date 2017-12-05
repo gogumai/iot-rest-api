@@ -1,13 +1,18 @@
 const Koa = require('koa');
 const compress = require('koa-compress');
 const logger = require('koa-logger');
+const bodyParser = require('koa-bodyparser');
 
-const indexRoutes = require('./src/routes');
+// const indexRoutes = require('./src/routes');
+const devicesRoutes = require('./src/routes/devices');
 
 const app = new Koa();
 
 // Port
 const PORT = process.env.PORT || 1337;
+
+// Body parser
+app.use(bodyParser());
 
 // Logger
 app.use(logger());
@@ -15,8 +20,7 @@ app.use(logger());
 // Compress
 app.use(compress());
 
-
-app.use(indexRoutes.routes());
+app.use(devicesRoutes.routes());
 
 app.listen(PORT);
-console.log(`listening on port ${PORT}`);
+console.log(`listening on port ${PORT}`); // eslint-disable-line no-console
