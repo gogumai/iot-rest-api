@@ -1,6 +1,15 @@
 const Devices = require('../models/devices');
 const { buildOkBody, buildErrorBody } = require('../utils');
 
+/** Devices controller module handles the logic between
+* the devices related requests and the access to the models
+* @module controllers/devices
+*/
+
+/** Get all existent devices
+* @param {Object} ctx - koa context
+* @return {Object} the devices
+*/
 const getAllDevices = async (ctx) => {
   await Devices.findAll()
     .then((devices) => {
@@ -13,6 +22,10 @@ const getAllDevices = async (ctx) => {
     });
 };
 
+/** Adds a device
+* @param {Object} ctx - koa context
+* @return {Object} the recently added device
+*/
 const addDevice = async (ctx) => {
   await Devices.saveDevice(ctx.request.body)
     .then((device) => {

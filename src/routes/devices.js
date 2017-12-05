@@ -2,6 +2,10 @@ const Router = require('koa-router');
 const Devices = require('../controllers/devices');
 const ReadingsRouter = require('./readings');
 
+/** Devices related routes.
+* @module routes/devices
+*/
+
 const router = Router({ prefix: '/devices' });
 
 router.post('/', Devices.addDevice);
