@@ -1,8 +1,8 @@
 const shortid = require('shortid');
-const Device = require('./schema');
+const Device = require('../models/devices');
 
-/** Devices model logic.
-* @module models/devices
+/** Devices repo logic.
+* @module repos/devices
 */
 
 /** Finds a device by its id

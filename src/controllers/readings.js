@@ -1,8 +1,8 @@
-const Readings = require('../models/readings');
+const Readings = require('../repos/readings');
 const { buildOkBody, buildErrorBody } = require('../utils');
 
 /** Devices controller module handles the logic between
-* the readings related requests and the access to the models
+* the readings related requests and the access to the repos
 * @module controllers/readings
 */
 
