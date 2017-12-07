@@ -11,8 +11,8 @@ const router = Router({ prefix: '/devices' });
 router.post('/', Devices.addDevice);
 router.get('/', Devices.getAllDevices);
 
-router.use('/:deviceId/readings', ReadingsRouter.nestedRouter.routes());
+router.use('/:deviceId/readings', ReadingsRouter.nestedRoutes);
 
 module.exports = {
-  router,
+  routes: router.routes(),
 };

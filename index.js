@@ -20,8 +20,8 @@ app.use(logger());
 // Compress
 app.use(compress());
 
-app.use(devicesRoutes.router.routes());
-app.use(readingsRoutes.router.routes());
+app.use(devicesRoutes.routes);
+app.use(readingsRoutes.routes);
 
 app.listen(PORT);
 console.log(`listening on port ${PORT}`); // eslint-disable-line no-console
