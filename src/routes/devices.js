@@ -13,6 +13,4 @@ router.get('/', Devices.getAllDevices);
 
 router.use('/:deviceId/readings', ReadingsRouter.nestedRoutes);
 
-module.exports = {
-  routes: router.routes(),
-};
+module.exports = router.routes();

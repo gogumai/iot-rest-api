@@ -4,7 +4,7 @@ const logger = require('koa-logger');
 const bodyParser = require('koa-bodyparser');
 
 const devicesRoutes = require('./src/routes/devices');
-const readingsRoutes = require('./src/routes/readings');
+const { routes: readingsRoutes } = require('./src/routes/readings');
 
 const app = new Koa();
 
@@ -20,8 +20,8 @@ app.use(logger());
 // Compress
 app.use(compress());
 
-app.use(devicesRoutes.routes);
-app.use(readingsRoutes.routes);
+app.use(devicesRoutes);
+app.use(readingsRoutes);
 
 app.listen(PORT);
 console.log(`listening on port ${PORT}`); // eslint-disable-line no-console
