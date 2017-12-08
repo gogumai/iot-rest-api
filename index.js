@@ -12,7 +12,7 @@ const app = new Koa();
 const PORT = process.env.PORT || 1337;
 
 // Body parser
-app.use(bodyParser());
+if (process.env.NODE_ENV !== 'test') app.use(bodyParser());
 
 // Logger
 app.use(logger());
@@ -23,5 +23,8 @@ app.use(compress());
 app.use(devicesRoutes);
 app.use(readingsRoutes);
 
-app.listen(PORT);
-console.log(`listening on port ${PORT}`); // eslint-disable-line no-console
+
+const server = app.listen(PORT, () => {
+  if (process.env.NODE_ENV !== 'test') console.log(`listening on port ${PORT}`); // eslint-disable-line no-console
+});
+module.exports = server;
