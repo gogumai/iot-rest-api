@@ -11,9 +11,10 @@ describe('Controllers - devices', () => {
       const context = {};
       it('should return empty result', async () => {
         await getAllDevices(context);
-        expect(context.status).to.equal(200);
-        expect(context.body.success).to.equal(true);
-        expect(context.body.result.length).to.equal(0);
+        const { status, body: { success, result } } = context;
+        expect(status).to.equal(200);
+        expect(success).to.be.true;
+        expect(result).to.have.lengthOf(0);
       });
     });
 
@@ -27,10 +28,11 @@ describe('Controllers - devices', () => {
 
       it('should return the devices', async () => {
         await getAllDevices(context);
-        expect(context.status).to.equal(200);
-        expect(context.body.success).to.equal(true);
-        expect(context.body.result.length).to.equal(1);
-        expect(isIncluded(context.body.result[0], newDevice)).to.equal(true);
+        const { status, body: { success, result } } = context;
+        expect(status).to.equal(200);
+        expect(success).to.be.true;
+        expect(result).to.have.lengthOf(1);
+        expect(isIncluded(result[0], newDevice)).to.be.true;
       });
     });
   });
@@ -45,9 +47,10 @@ describe('Controllers - devices', () => {
 
     it('should return the device that was added', async () => {
       await addDevice(context);
-      expect(context.status).to.equal(201);
-      expect(context.body.success).to.equal(true);
-      expect(isIncluded(context.body.result, newDevice)).to.equal(true);
+      const { status, body: { success, result } } = context;
+      expect(status).to.equal(201);
+      expect(success).to.be.true;
+      expect(isIncluded(result, newDevice)).to.be.true;
     });
   });
 });

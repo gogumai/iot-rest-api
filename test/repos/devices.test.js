@@ -42,7 +42,7 @@ describe('Model - devices', () => {
 
       it('should return all the existent devices', async () => {
         await findAll().then((result) => {
-          expect(result.length).to.equal(1);
+          expect(result).to.have.lengthOf(1);
           expect(result[0]).to.deep.include(newDevice.toObject());
         });
       });

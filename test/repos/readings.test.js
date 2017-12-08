@@ -57,7 +57,7 @@ describe('Model - readings', () => {
 
       it('should return the readings that match the input', async () => {
         await findReadings(options).then((result) => {
-          expect(result.length).to.equal(1);
+          expect(result).to.have.lengthOf(1);
           expect(result[0]).to.deep.include(newReading.toObject());
         });
       });

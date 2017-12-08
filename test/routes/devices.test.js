@@ -4,7 +4,7 @@ const { saveDevice } = require('../../src/repos/devices');
 const { buildDevice } = require('../../src/utils/');
 const server = require('./../../index');
 
-const should = chai.should();
+const { expect } = chai;
 chai.use(chaiHttp);
 
 const DEVICE_KEYS = [
@@ -21,10 +21,11 @@ describe('Routes - devices', () => {
         chai.request(server)
           .get('/devices')
           .end((err, res) => {
-            should.not.exist(err);
-            res.status.should.equal(200);
-            res.body.success.should.eql(true);
-            res.body.result.length.should.eql(0);
+            const { status, body: { success, result } } = res;
+            expect(err).to.be.null;
+            expect(success).to.be.true;
+            expect(status).to.equal(200);
+            expect(result).to.have.lengthOf(0);
             done();
           });
       });
@@ -41,12 +42,13 @@ describe('Routes - devices', () => {
         chai.request(server)
           .get('/devices')
           .end((err, res) => {
-            should.not.exist(err);
-            res.status.should.equal(200);
-            res.body.success.should.eql(true);
-            res.body.result.length.should.eql(1);
-            res.body.result[0].should.include.keys(...DEVICE_KEYS);
-            res.body.result[0].should.deep.include(newDevice.toObject());
+            const { status, body: { success, result } } = res;
+            expect(err).to.be.null;
+            expect(success).to.be.true;
+            expect(status).to.equal(200);
+            expect(result).to.have.lengthOf(1);
+            expect(result[0]).to.have.all.keys(...DEVICE_KEYS);
+            expect(result[0]).to.deep.include(newDevice.toObject());
             done();
           });
       });
@@ -60,11 +62,12 @@ describe('Routes - devices', () => {
         .post('/devices')
         .send(newDevice)
         .end((err, res) => {
-          should.not.exist(err);
-          res.status.should.equal(201);
-          res.body.success.should.eql(true);
-          res.body.result.should.include.keys(DEVICE_KEYS);
-          res.body.result.should.deep.include(newDevice);
+          const { status, body: { success, result } } = res;
+          expect(err).to.be.null;
+          expect(status).to.equal(201);
+          expect(success).to.be.true;
+          expect(result).to.have.all.keys(...DEVICE_KEYS);
+          expect(result).to.deep.include(newDevice);
           done();
         });
     });

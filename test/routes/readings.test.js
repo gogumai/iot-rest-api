@@ -5,7 +5,6 @@ const { saveReading } = require('../../src/repos/readings');
 const { isIncluded, buildDevice, buildReading } = require('../../src/utils');
 const server = require('./../../index');
 
-const should = chai.should();
 const { expect } = chai;
 chai.use(chaiHttp);
 
@@ -33,11 +32,12 @@ describe('Routes - readings', () => {
         .post(`/devices/${newDevice._id}/readings`)
         .send(newReading)
         .end((err, res) => {
-          should.not.exist(err);
-          res.status.should.equal(201);
-          res.body.success.should.eql(true);
-          res.body.result.should.include.keys(...READINGS_KEYS);
-          expect(isIncluded(res.body.result, newReading)).to.equal(true);
+          const { status, body: { success, result } } = res;
+          expect(err).to.be.null;
+          expect(success).to.be.true;
+          expect(status).to.equal(201);
+          expect(result).to.have.all.keys(...READINGS_KEYS);
+          expect(isIncluded(res.body.result, newReading)).to.be.true;
           done();
         });
     });
@@ -55,10 +55,11 @@ describe('Routes - readings', () => {
         chai.request(server)
           .get(`/devices/${newDevice._id}/readings`)
           .end((err, res) => {
-            should.not.exist(err);
-            res.status.should.equal(200);
-            res.body.success.should.eql(true);
-            res.body.result.length.should.eql(0);
+            const { status, body: { success, result } } = res;
+            expect(err).to.be.null;
+            expect(success).to.be.true;
+            expect(status).to.equal(200);
+            expect(result).to.have.lengthOf(0);
             done();
           });
       });
@@ -75,12 +76,13 @@ describe('Routes - readings', () => {
         chai.request(server)
           .get(`/devices/${newDevice._id}/readings`)
           .end((err, res) => {
-            should.not.exist(err);
-            res.status.should.equal(200);
-            res.body.success.should.eql(true);
-            res.body.result.length.should.eql(1);
-            res.body.result[0].should.include.keys(...READINGS_KEYS);
-            expect(isIncluded(res.body.result[0], newReading.toObject())).to.equal(true);
+            const { status, body: { success, result } } = res;
+            expect(err).to.be.null;
+            expect(success).to.be.true;
+            expect(status).to.equal(200);
+            expect(result).to.have.lengthOf(1);
+            expect(result[0]).to.have.all.keys(...READINGS_KEYS);
+            expect(isIncluded(res.body.result[0], newReading.toObject())).to.be.true;
             done();
           });
       });
@@ -101,12 +103,13 @@ describe('Routes - readings', () => {
         chai.request(server)
           .get('/readings?used_memory_percentage=1')
           .end((err, res) => {
-            should.not.exist(err);
-            res.status.should.equal(200);
-            res.body.success.should.eql(true);
-            res.body.result.length.should.eql(1);
-            res.body.result[0].should.include.keys(...READINGS_KEYS);
-            expect(isIncluded(res.body.result[0], newReading.toObject())).to.equal(true);
+            const { status, body: { success, result } } = res;
+            expect(err).to.be.null;
+            expect(success).to.be.true;
+            expect(status).to.equal(200);
+            expect(result).to.have.lengthOf(1);
+            expect(result[0]).to.have.all.keys(...READINGS_KEYS);
+            expect(isIncluded(res.body.result[0], newReading.toObject())).to.be.true;
             done();
           });
       });
@@ -117,10 +120,11 @@ describe('Routes - readings', () => {
         chai.request(server)
           .get('/readings?used_memory_percentage=2')
           .end((err, res) => {
-            should.not.exist(err);
-            res.status.should.equal(200);
-            res.body.success.should.eql(true);
-            res.body.result.length.should.eql(0);
+            const { status, body: { success, result } } = res;
+            expect(err).to.be.null;
+            expect(success).to.be.true;
+            expect(status).to.equal(200);
+            expect(result).to.have.lengthOf(0);
             done();
           });
       });

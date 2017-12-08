@@ -19,31 +19,25 @@ const isIncluded = (a, b) => {
 
     if (valueA !== valueB) {
       if (valueA instanceof Date || valueB instanceof Date) {
-        if (Date.parse(valueA) !== Date.parse(valueB)) return false;
-      } else {
-        return false;
+        return !(Date.parse(valueA) !== Date.parse(valueB));
       }
     }
   }
   return true;
 };
 
-const buildReading = (deviceId) => {
-  return {
-    device_id: deviceId,
-    used_memory_percentage: 1,
-    cpu_load: 1,
-    disk_usage_percentage: 1,
-    cpu_temperature: 1,
-    datetime: new Date('2017-12-06T00:00:00.000Z'),
-  }
-};
+const buildReading = deviceId => ({
+  device_id: deviceId,
+  used_memory_percentage: 1,
+  cpu_load: 1,
+  disk_usage_percentage: 1,
+  cpu_temperature: 1,
+  datetime: new Date('2017-12-06T00:00:00.000Z'),
+});
 
-const buildDevice = () => {
-  return {
-    friendly_name: 'Un device',
-  };
-};
+const buildDevice = () => ({
+  friendly_name: 'Un device',
+});
 
 module.exports = {
   buildOkBody,

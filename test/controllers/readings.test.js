@@ -27,9 +27,10 @@ describe('Controllers - readings', () => {
 
     it('should return the reading that was added', async () => {
       await addReading(context);
-      expect(context.status).to.equal(201);
-      expect(context.body.success).to.equal(true);
-      expect(isIncluded(context.body.result, newReading)).to.equal(true);
+      const { status, body: { success, result } } = context;
+      expect(status).to.equal(201);
+      expect(success).to.be.true;
+      expect(isIncluded(result, newReading)).to.be.true;
     });
   });
 
@@ -50,9 +51,10 @@ describe('Controllers - readings', () => {
 
       it('should return empty result', async () => {
         await getReadingsForDevice(context);
-        expect(context.status).to.equal(200);
-        expect(context.body.success).to.equal(true);
-        expect(context.body.result.length).to.equal(0);
+        const { status, body: { success, result } } = context;
+        expect(status).to.equal(200);
+        expect(success).to.be.true;
+        expect(result).to.have.lengthOf(0);
       });
     });
 
@@ -73,10 +75,11 @@ describe('Controllers - readings', () => {
 
       it('should return the readings', async () => {
         await getReadings(context);
-        expect(context.status).to.equal(200);
-        expect(context.body.success).to.equal(true);
-        expect(context.body.result.length).to.equal(1);
-        expect(isIncluded(context.body.result[0], newReading.toObject())).to.equal(true);
+        const { status, body: { success, result } } = context;
+        expect(status).to.equal(200);
+        expect(success).to.be.true;
+        expect(result).to.have.lengthOf(1);
+        expect(isIncluded(result[0], newReading.toObject())).to.be.true;
       });
     });
   });
@@ -101,10 +104,11 @@ describe('Controllers - readings', () => {
 
       it('should return the readings that match the input', async () => {
         await getReadings(context);
-        expect(context.status).to.equal(200);
-        expect(context.body.success).to.equal(true);
-        expect(context.body.result.length).to.equal(1);
-        expect(isIncluded(context.body.result[0], newReading.toObject())).to.equal(true);
+        const { status, body: { success, result } } = context;
+        expect(status).to.equal(200);
+        expect(success).to.be.true;
+        expect(result).to.have.lengthOf(1);
+        expect(isIncluded(result[0], newReading.toObject())).to.be.true;
       });
     });
 
@@ -118,9 +122,10 @@ describe('Controllers - readings', () => {
       };
       it('should return an empty array', async () => {
         await getReadings(context);
-        expect(context.status).to.equal(200);
-        expect(context.body.success).to.equal(true);
-        expect(context.body.result.length).to.equal(0);
+        const { status, body: { success, result } } = context;
+        expect(status).to.equal(200);
+        expect(success).to.be.true;
+        expect(result).to.have.lengthOf(0);
       });
     });
   });
