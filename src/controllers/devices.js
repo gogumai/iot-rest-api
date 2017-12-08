@@ -1,8 +1,8 @@
-const Devices = require('../models/devices');
+const Devices = require('../repos/devices');
 const { buildOkBody, buildErrorBody } = require('../utils');
 
 /** Devices controller module handles the logic between
-* the devices related requests and the access to the models
+* the devices related requests and the access to the repos
 * @module controllers/devices
 */
 

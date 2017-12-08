@@ -1,9 +1,9 @@
 const shortid = require('shortid');
-const Reading = require('./schema');
-const Device = require('../devices');
+const Reading = require('../models/readings');
+const Device = require('./devices');
 
-/** Readings model logic.
-* @module models/readings
+/** Readings repo logic.
+* @module repos/readings
 */
 
 /** Finds all the readings that match the specified options

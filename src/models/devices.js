@@ -1,5 +1,5 @@
-const mongoose = require('../mongoose');
-const Readings = require('../readings/schema');
+const mongoose = require('./mongoose');
+const Readings = require('./readings');
 
 const { Schema } = mongoose;
 

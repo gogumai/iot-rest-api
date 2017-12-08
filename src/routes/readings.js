@@ -13,6 +13,6 @@ const router = Router({ prefix: '/readings' });
 router.get('/', Readings.getReadings);
 
 module.exports = {
-  nestedRouter,
-  router,
+  nestedRoutes: nestedRouter.routes(),
+  routes: router.routes(),
 };
